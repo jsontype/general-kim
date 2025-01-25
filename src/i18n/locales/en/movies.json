@@ -1,0 +1,16 @@
+{
+  "title": "Movies",
+  "description": "Here you can find the best movies",
+  "item": {
+    "title": "Title",
+    "year": "Year",
+    "rating": "Rating",
+    "genre": "Genre",
+    "runtime": "Runtime",
+    "story": "Story",
+    "details": "View Details",
+    "noInfo": "No Information"
+  },
+  "loading": "Loading...",
+  "showDetail": "Show Details"
+}

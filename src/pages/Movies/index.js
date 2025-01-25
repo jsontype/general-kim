@@ -9,10 +9,12 @@ import AccordionDetails from "@mui/material/AccordionDetails"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import { useState, useEffect } from "react"
 import Label from "../../components/atoms/Label"
+import { useTranslation } from "react-i18next"
 
 export default function Movies() {
   const [movies, setMovies] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const { t } = useTranslation()
 
   // mounted
   useEffect(() => {
@@ -28,6 +30,8 @@ export default function Movies() {
   }, [])
 
   console.log("movies: ", movies)
+
+  console.log("t: ", t("movies:title"))  
 
   const loading = (
     <Box sx={{ display: "flex" }}>
@@ -58,7 +62,7 @@ export default function Movies() {
               aria-controls="panel1-content"
               id="panel1-header"
             >
-              詳細を見る
+              { t("movies:showDetail") }
             </AccordionSummary>
             <AccordionDetails>
               <div>
