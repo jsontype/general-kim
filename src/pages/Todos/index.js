@@ -3,8 +3,8 @@ import Checkbox from "@mui/material/Checkbox"
 import IconButton from "@mui/material/IconButton"
 import DeleteIcon from "@mui/icons-material/Delete"
 import TextField from "@mui/material/TextField"
-import Label from "../../components/Atoms/Label"
-import NormalButton from "../../components/Atoms/NormalButton"
+import Label from "../../components/atoms/Label"
+import NormalButton from "../../components/atoms/NormalButton"
 
 export default function Todos() {
   const [todos, setTodos] = useState([])

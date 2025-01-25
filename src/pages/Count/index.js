@@ -1,6 +1,6 @@
 import React from "react"
 import Button from "@mui/material/Button"
-import Label from "../../components/Atoms/Label"
+import Label from "../../components/atoms/Label"
 import { useState } from "react"
 
 export default function Count() {
