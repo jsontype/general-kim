@@ -1,5 +1,5 @@
 import React from "react"
-import Label from "../../components/Atoms/Label"
+import Label from "../../components/atoms/Label"
 
 export default function Home() {
   return (
