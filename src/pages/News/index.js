@@ -1,6 +1,7 @@
 import React from "react"
-import Label from "../../components/Atoms/Label"
+import Label from "../../components/atoms/Label"
 import { useState, useEffect } from "react"
+import NewsTable from "../../components/organisms/NewsTable"
 
 export default function News() {
   const [news, setNews] = useState([])
@@ -14,29 +15,11 @@ export default function News() {
       })
   }, [])
 
-  console.log("news: ", news)
-
-  const render = news.map((item) => {
-    return (
-      <div key={item.id}>
-        <a
-          className="no-underline text-black hover:bg-pink-500 hover:text-white"
-          target="_blank"
-          href={item.url}
-          rel="noreferrer"
-        >
-          {item.title}
-        </a>
-        <span> / ID: {item.user}</span>
-      </div>
-    )
-  })
-
   return (
     <div>
       <Label text="News" />
 
-      <div>{render}</div>
+      <NewsTable news={news} />
     </div>
   )
 }

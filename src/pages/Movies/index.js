@@ -8,7 +8,7 @@ import AccordionSummary from "@mui/material/AccordionSummary"
 import AccordionDetails from "@mui/material/AccordionDetails"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import { useState, useEffect } from "react"
-import Label from "../../components/Atoms/Label"
+import Label from "../../components/atoms/Label"
 
 export default function Movies() {
   const [movies, setMovies] = useState([])
