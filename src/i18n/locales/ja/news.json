@@ -1,0 +1,12 @@
+{
+  "title": "ニュース",
+  "labels": {
+    "index": "番号",
+    "news": "ニュース",
+    "title": "タイトル",
+    "commentCount": "コメント数",
+    "user": "ユーザー",
+    "points": "ポイント",
+    "timeAgo": "登録時間"
+  }
+}

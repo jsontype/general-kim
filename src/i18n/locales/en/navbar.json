@@ -1,0 +1,13 @@
+{
+  "home": "Home",
+  "movies": "Movies",
+  "count": "Count",
+  "news": "News",
+  "todos": "Todos",
+  "language": {
+    "select": "Language",
+    "en": "English",
+    "ja": "Japanese",
+    "ko": "Korean"
+  }
+}

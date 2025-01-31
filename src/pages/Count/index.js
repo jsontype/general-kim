@@ -2,13 +2,15 @@ import React from "react"
 import Button from "@mui/material/Button"
 import Label from "../../components/atoms/Label"
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
 
 export default function Count() {
   const [count, setCount] = useState(0)
+  const { t } = useTranslation("count")
 
   return (
     <>
-      <Label text="Counter" />
+      <Label text={t("title")} />
 
       <h1>{count}</h1>
 

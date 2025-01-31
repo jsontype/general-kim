@@ -4,6 +4,7 @@ import App from "./App"
 // routerを使うための準備１
 import { BrowserRouter } from "react-router-dom"
 import "./tailwind.css"
+import "./i18n"
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(

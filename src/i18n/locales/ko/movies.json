@@ -1,0 +1,16 @@
+{
+  "title": "영화",
+  "description": "최고의 영화를 찾아보세요",
+  "item": {
+    "title": "제목",
+    "year": "연도",
+    "rating": "평점",
+    "genre": "장르",
+    "runtime": "시간",
+    "story": "스토리",
+    "details": "상세보기",
+    "noInfo": "정보 없음"
+  },
+  "loading": "Loading...",
+  "showDetail": "상세보기"
+}

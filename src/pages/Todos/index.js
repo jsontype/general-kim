@@ -5,11 +5,13 @@ import DeleteIcon from "@mui/icons-material/Delete"
 import TextField from "@mui/material/TextField"
 import Label from "../../components/atoms/Label"
 import NormalButton from "../../components/atoms/NormalButton"
+import { useTranslation } from "react-i18next"
 
 export default function Todos() {
   const [todos, setTodos] = useState([])
   const [inputText, setInputText] = useState("")
   const [todoKey, setTodoKey] = useState(0)
+  const { t } = useTranslation("todos")
 
   // Mounted
   useEffect(() => {
@@ -75,7 +77,7 @@ export default function Todos() {
 
   return (
     <div>
-      <Label text="Todos" />
+      <Label text={t("title")} />
 
       <div className="mb-[20px]">
         <span className="mr-[5px]">
@@ -83,13 +85,16 @@ export default function Todos() {
             value={inputText}
             size="small"
             required
-            placeholder="New Todo"
+            placeholder={t("inputPlaceHolder")}
             onChange={(e) => {
               setInputText(e.target.value)
             }}
           />
         </span>
-        <NormalButton buttonText="SEND" onClick={() => addTodo(inputText)} />
+        <NormalButton
+          buttonText={t("sendButton")}
+          onClick={() => addTodo(inputText)}
+        />
       </div>
       <div>{render}</div>
     </div>

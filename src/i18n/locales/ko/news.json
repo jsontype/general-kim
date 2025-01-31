@@ -1,0 +1,12 @@
+{
+  "title": "뉴스",
+  "labels": {
+    "index": "번호",
+    "news": "뉴스",
+    "title": "제목",
+    "commentCount": "댓글 수",
+    "user": "유저",
+    "points": "포인트",
+    "timeAgo": "등록시간"
+  }
+}
