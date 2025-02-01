@@ -1,0 +1,16 @@
+{
+  "title": "映画",
+  "description": "最高の映画を見つけよう",
+  "item": {
+    "title": "タイトル",
+    "year": "年",
+    "rating": "評価",
+    "genre": "ジャンル",
+    "runtime": "長さ",
+    "story": "ストーリー",
+    "details": "詳細を見る",
+    "noInfo": "情報なし"
+  },
+  "loading": "Loading...",
+  "showDetail": "詳細を表示"
+}

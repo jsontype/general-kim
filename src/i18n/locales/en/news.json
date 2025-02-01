@@ -1,0 +1,12 @@
+{
+  "title": "News",
+  "labels": {
+    "index": "Index",
+    "news": "News",
+    "title": "Title",
+    "commentCount": "Comment Count",
+    "user": "User",
+    "points": "Points",
+    "timeAgo": "Time Ago"
+  }
+}

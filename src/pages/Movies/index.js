@@ -9,10 +9,12 @@ import AccordionDetails from "@mui/material/AccordionDetails"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import { useState, useEffect } from "react"
 import Label from "../../components/atoms/Label"
+import { useTranslation } from "react-i18next"
 
 export default function Movies() {
   const [movies, setMovies] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const { t } = useTranslation("movies")
 
   // mounted
   useEffect(() => {
@@ -58,11 +60,11 @@ export default function Movies() {
               aria-controls="panel1-content"
               id="panel1-header"
             >
-              詳細を見る
+              {t("showDetail")}
             </AccordionSummary>
             <AccordionDetails>
               <div>
-                評価：
+                {`${t("item.rating")}: `}
                 <Tooltip title={movie.rating + "/10点"} placement="right">
                   <Box
                     display="inline"
@@ -79,9 +81,18 @@ export default function Movies() {
                   </Box>
                 </Tooltip>
               </div>
-              <div>ジャンル：{movie.genres.join(", ")}</div>
-              <div>ランタイム：{movie.runtime}分</div>
-              <div>ストーリー：{movie.synopsis || "情報無し"}</div>
+              <div>
+                {`${t("item.genre")}: `}
+                {Array.isArray(movie.genres) ? movie.genres.join(", ") : ""}
+              </div>
+              <div>
+                {" "}
+                {`${t("item.runtime")}: `} {movie.runtime}分
+              </div>
+              <div>
+                {`${t("item.story")}: `}
+                {`${movie.synopsis || t("item.noInfo")} `}
+              </div>
             </AccordionDetails>
           </Accordion>
         </div>
@@ -91,7 +102,7 @@ export default function Movies() {
 
   return (
     <div>
-      <Label text="Movies" />
+      <Label text={t("title")} />
 
       <div>{isLoading ? loading : render}</div>
     </div>
