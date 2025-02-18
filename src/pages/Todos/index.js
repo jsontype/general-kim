@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react"
-import Checkbox from "@mui/material/Checkbox"
-import IconButton from "@mui/material/IconButton"
-import DeleteIcon from "@mui/icons-material/Delete"
+import React, { useState, useEffect, useCallback } from "react"
 import TextField from "@mui/material/TextField"
 import Label from "../../components/atoms/Label"
 import NormalButton from "../../components/atoms/NormalButton"
 import { useTranslation } from "react-i18next"
+import TodosList from "../../components/organisms/TodosList"
 
 export default function Todos() {
   const [todos, setTodos] = useState([])
@@ -24,31 +22,8 @@ export default function Todos() {
       })
   }, [])
 
-  const render = todos.map((todo) => {
-    return (
-      <div key={todo.id}>
-        <div>
-          <span
-            className={
-              todo.completed ? "text-gray-500 line-through" : "font-bold"
-            }
-            onClick={() => modTodo(todo.id)}
-          >
-            #{todo.id} / {todo.title}
-          </span>
-          <Checkbox
-            checked={todo.completed}
-            onChange={() => modTodo(todo.id)}
-          />
-          <IconButton aria-label="delete" onClick={() => delTodo(todo.id)}>
-            <DeleteIcon />
-          </IconButton>
-        </div>
-      </div>
-    )
-  })
-
   // Insert
+  // 메모화 o/x = props로 넘겨서 새로 생성되는 함수가 아니며 항상 값에 상관없이 todo를 추가 하므로 메모화는 불필요.
   const addTodo = (inputText) => {
     const addItem = [
       ...todos,
@@ -57,22 +32,6 @@ export default function Todos() {
     setTodoKey(todoKey + 1)
     setTodos(addItem)
     setInputText("")
-  }
-
-  // Delete
-  const delTodo = (id) => {
-    const delItem = todos.filter((item) => {
-      return item.id !== id
-    })
-    setTodos(delItem)
-  }
-
-  // Update
-  const modTodo = (id) => {
-    const modItem = todos.map((item) => {
-      return item.id === id ? { ...item, completed: !item.completed } : item
-    })
-    setTodos(modItem)
   }
 
   return (
@@ -96,7 +55,9 @@ export default function Todos() {
           onClick={() => addTodo(inputText)}
         />
       </div>
-      <div>{render}</div>
+      <div>
+        <TodosList setTodos={setTodos} todos={todos} />
+      </div>
     </div>
   )
 }

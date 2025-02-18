@@ -1,6 +1,7 @@
 import { TableCell, TableRow } from "@mui/material"
+import React from "react"
 
-export default function NewsTableContent({ item, index }) {
+function NewsTableContent({ item, index }) {
   const onClick = (url) => {
     window.open(url, "_blank")
   }
@@ -25,3 +26,5 @@ export default function NewsTableContent({ item, index }) {
     </TableRow>
   )
 }
+
+export default React.memo(NewsTableContent)

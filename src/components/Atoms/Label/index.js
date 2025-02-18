@@ -8,14 +8,3 @@ export default function Label({ text }) {
     </Typography>
   )
 }
-
-// Atomic Design
-
-// Atoms
-// Label
-// Button
-//
-
-// Models
-// Label + Button = TextAndButton
-// Button + Button = ButtonGroup
