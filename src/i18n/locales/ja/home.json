@@ -1,7 +1,8 @@
 {
   "title": "ホーム",
   "counter": "カウンター",
-  "todo": "TODOリスト",
+  "todos": "TODOリスト",
   "movies": "映画",
-  "news": "ニュース"
+  "news": "ニュース",
+  "todoState": "選択されたState :"
 }

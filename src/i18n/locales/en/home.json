@@ -1,7 +1,8 @@
 {
   "title": "Home",
   "counter": "Counter",
-  "todo": "Todos",
+  "todos": "Todos",
   "movies": "Movies",
-  "news": "News"
+  "news": "News",
+  "todoState": "Selected State :"
 }
