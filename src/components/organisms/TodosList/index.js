@@ -3,7 +3,7 @@ import IconButton from "@mui/material/IconButton"
 import DeleteIcon from "@mui/icons-material/Delete"
 import React from "react"
 
-function TodosList({ todos, setTodos }) {
+function TodosList({ todos, setTodos, renderTodos }) {
   // Delete
   // 메모화 o/x = TodosList자체가 메모화되고 todos에 따라 함수가 변하므로 변화는 조건이 동일.. 그러므로 메모화는 불필요.
   const delTodo = (id) => {
@@ -21,7 +21,7 @@ function TodosList({ todos, setTodos }) {
     setTodos(modItem)
   }
 
-  return todos.map((todo) => {
+  return renderTodos.map((todo) => {
     return (
       <div key={todo.id}>
         <div>
