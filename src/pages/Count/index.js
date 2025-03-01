@@ -3,10 +3,23 @@ import Button from "@mui/material/Button"
 import Label from "../../components/atoms/Label"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
+import { useRecoilState } from "recoil"
+import { countAtom } from "../../store/countAtom"
 
 export default function Count() {
-  const [count, setCount] = useState(0)
+  const [countState, setCountState] = useRecoilState(countAtom)
+  const [count, setCount] = useState(countState)
   const { t } = useTranslation("count")
+
+  const addCount = () => {
+    setCount(count + 1)
+    setCountState(count + 1)
+  }
+
+  const subCount = () => {
+    setCount(count - 1)
+    setCountState(count - 1)
+  }
 
   return (
     <>
@@ -18,7 +31,7 @@ export default function Count() {
         size="small"
         variant="outlined"
         color="success"
-        onClick={() => setCount(count + 1)}
+        onClick={() => addCount()}
       >
         +
       </Button>
@@ -26,7 +39,7 @@ export default function Count() {
         size="small"
         variant="outlined"
         color="error"
-        onClick={() => setCount(count - 1)}
+        onClick={() => subCount()}
       >
         -
       </Button>

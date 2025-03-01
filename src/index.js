@@ -5,11 +5,14 @@ import App from "./App"
 import { BrowserRouter } from "react-router-dom"
 import "./tailwind.css"
 import "./i18n"
+import { RecoilRoot } from "recoil"
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
   // routerを使うための準備２
   <BrowserRouter>
-    <App />
+    <RecoilRoot>
+      <App />
+    </RecoilRoot>
   </BrowserRouter>
 )

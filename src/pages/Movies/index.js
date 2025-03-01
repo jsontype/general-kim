@@ -1,40 +1,42 @@
 import React from "react"
-import Box from "@mui/material/Box"
-import CircularProgress from "@mui/material/CircularProgress"
 import { useState, useEffect } from "react"
 import Label from "../../components/atoms/Label"
 import { useTranslation } from "react-i18next"
 import MovieList from "../../components/organisms/MovieList"
+import { useRecoilState } from "recoil"
+import { moviesFetchTriggerAtom } from "../../store/moviesFetchTriggerAtom"
+import { moviesDataAtom } from "../../store/moviesDataAtom"
+import Loading from "../../components/molecules/Loading"
 
 export default function Movies() {
-  const [movies, setMovies] = useState([])
+  const [movies, setMovies] = useRecoilState(moviesDataAtom)
+  const [isFetchRequired, setIsFetchRequired] = useRecoilState(
+    moviesFetchTriggerAtom
+  )
   const [isLoading, setIsLoading] = useState(false)
   const { t } = useTranslation("movies")
 
   // mounted
   useEffect(() => {
-    // Loading中のフラグ
-    setIsLoading(true)
-    // fetch("https://yts.mx/api/v2/list_movies.json?sort_by=rating")
-    fetch("https://yts.mx/api/v2/list_movies.json")
-      .then((res) => res.json())
-      .then((json) => {
-        setIsLoading(false)
-        setMovies(json.data.movies)
-      })
-  }, [])
-
-  const loading = (
-    <Box sx={{ display: "flex" }}>
-      <CircularProgress />
-    </Box>
-  )
+    if (isFetchRequired === true) {
+      // Loading中のフラグ
+      setIsLoading(true)
+      // fetch("https://yts.mx/api/v2/list_movies.json?sort_by=rating")
+      fetch("https://yts.mx/api/v2/list_movies.json")
+        .then((res) => res.json())
+        .then((json) => {
+          setIsLoading(false)
+          setMovies(json.data.movies)
+        })
+      setIsFetchRequired(false)
+    }
+  }, [isFetchRequired])
 
   return (
     <div>
       <Label text={t("title")} />
 
-      <div>{isLoading ? loading : <MovieList movies={movies} />}</div>
+      <div>{isLoading ? <Loading /> : <MovieList movies={movies} />}</div>
     </div>
   )
 }
