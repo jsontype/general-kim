@@ -1,8 +1,8 @@
 import { Grid2 } from "@mui/material"
-import HomeCounterScoreBoard from "../../molecules/HomeCounterSroreBoard"
-import HomeTodoStateBoard from "../../molecules/HomeTodoStateBoard"
-import HomeMoviesFetchBoard from "../../molecules/HomeMoviesFetchBoard"
-import HomeNewsFetchBoard from "../../molecules/HomeNewsFetchBoard"
+import HomeCounterScoreBoard from "../../molecules/Home/HomeCounterSroreBoard"
+import HomeTodoStateBoard from "../../molecules/Home/HomeTodoStateBoard"
+import HomeMoviesFetchBoard from "../../molecules/Home/HomeMoviesFetchBoard"
+import HomeNewsFetchBoard from "../../molecules/Home/HomeNewsFetchBoard"
 import { useTranslation } from "react-i18next"
 
 const HomeBoard = () => {

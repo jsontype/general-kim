@@ -1,8 +1,8 @@
 import { Button, Typography } from "@mui/material"
 import RefreshIcon from "@mui/icons-material/Refresh"
 import { useSetRecoilState } from "recoil"
-import { newsFetchTriggerAtom } from "../../../store/newsFetchTriggerAtom"
-import HomeBoardBox from "../../atoms/HomeBoardBox"
+import { newsFetchTriggerAtom } from "../../../../store/newsFetchTriggerAtom"
+import HomeBoardBox from "../../../atoms/HomeBoardBox"
 
 const HomeNewsFetchBoard = ({ titleText }) => {
   const setIsFetchRequired = useSetRecoilState(newsFetchTriggerAtom)

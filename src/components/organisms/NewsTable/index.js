@@ -3,8 +3,8 @@ import Table from "@mui/material/Table"
 import TableBody from "@mui/material/TableBody"
 import TableContainer from "@mui/material/TableContainer"
 import Paper from "@mui/material/Paper"
-import NewsTableHeader from "../../molecules/NewsTableHeader"
-import NewsTableContent from "../../molecules/NewsTableContent"
+import NewsTableHeader from "../../molecules/News/NewsTableHeader"
+import NewsTableContent from "../../molecules/News/NewsTableContent"
 
 export default function NewsTable({ news }) {
   return (

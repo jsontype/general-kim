@@ -1,7 +1,7 @@
 import { useRecoilState, useRecoilValue } from "recoil"
-import { todoStateAtom } from "../../../store/todoStateAtom"
+import { todoStateAtom } from "../../../../store/todoStateAtom"
 import React, { useCallback } from "react"
-import { todoCountAtom } from "../../../store/todoCountAtom"
+import { todoCountAtom } from "../../../../store/todoCountAtom"
 import { Box, Button } from "@mui/material"
 
 const TodosCounter = () => {

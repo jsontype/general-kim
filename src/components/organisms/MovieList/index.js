@@ -1,5 +1,5 @@
 import React from "react"
-import MovieItem from "../../molecules/MovieItem"
+import MovieItem from "../../molecules/Movies/MovieItem"
 import { useTranslation } from "react-i18next"
 
 const MovieList = ({ movies }) => {

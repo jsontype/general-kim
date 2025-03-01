@@ -1,12 +1,12 @@
 import { useRecoilState, useRecoilValue } from "recoil"
 import { Box, Button, Typography } from "@mui/material"
-import { todoCountAtom } from "../../../store/todoCountAtom"
-import { todoStateAtom } from "../../../store/todoStateAtom"
+import { todoCountAtom } from "../../../../store/todoCountAtom"
+import { todoStateAtom } from "../../../../store/todoStateAtom"
 import { useCallback, useEffect } from "react"
-import useFetchTodos from "../../../util/fetchAPI/useFetchTodos"
-import { todoFetchTriggerAtom } from "../../../store/todoFetchTriggerAtom"
+import useFetchTodos from "../../../../util/fetchAPI/useFetchTodos"
+import { todoFetchTriggerAtom } from "../../../../store/todoFetchTriggerAtom"
 import RefreshIcon from "@mui/icons-material/Refresh"
-import HomeBoardBox from "../../atoms/HomeBoardBox"
+import HomeBoardBox from "../../../atoms/HomeBoardBox"
 import { useTranslation } from "react-i18next"
 
 const HomeTodoStateBoard = ({ titleText }) => {
