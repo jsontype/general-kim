@@ -1,32 +1,26 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Label from "../../components/atoms/Label"
-import { useState, useEffect } from "react"
 import NewsTable from "../../components/organisms/NewsTable"
 import { useTranslation } from "react-i18next"
 import Loading from "../../components/molecules/Loading"
-import { useRecoilState } from "recoil"
+import useFetchNews from "../../util/fetchAPI/useFetchNews"
+import { useRecoilState, useRecoilValue } from "recoil"
+import { newsPageNumberAtom } from "../../store/newsPageNumberAtom"
 import { newsFetchTriggerAtom } from "../../store/newsFetchTriggerAtom"
-import { newsDataAtom } from "../../store/newsDataAtom"
 
 export default function News() {
-  const [news, setNews] = useRecoilState(newsDataAtom)
-  const [isLoading, setIsLoading] = useState(false)
+  const { t } = useTranslation("news")
+  const { isLoading, loadNews, news } = useFetchNews()
+  const pageNumberParams = useRecoilValue(newsPageNumberAtom)
   const [isFetchRequired, setIsFetchRequired] =
     useRecoilState(newsFetchTriggerAtom)
-  const { t } = useTranslation("news")
 
   useEffect(() => {
     if (isFetchRequired === true) {
-      setIsLoading(true)
-      fetch("https://api.hnpwa.com/v0/news.json")
-        .then((res) => res.json())
-        .then((json) => {
-          setIsLoading(false)
-          setNews(json)
-        })
+      loadNews(pageNumberParams)
       setIsFetchRequired(false)
     }
-  }, [isFetchRequired])
+  }, [isFetchRequired, pageNumberParams])
 
   return (
     <div>
