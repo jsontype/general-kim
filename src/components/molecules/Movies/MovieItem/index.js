@@ -5,13 +5,11 @@ import Accordion from "@mui/material/Accordion"
 import AccordionSummary from "@mui/material/AccordionSummary"
 import AccordionDetails from "@mui/material/AccordionDetails"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
-import { Box, Typography } from "@mui/material"
+import { Box } from "@mui/material"
 import DetailsStory from "../../../atoms/Movies/DetailsStory"
 import DetailsLink from "../../../atoms/Movies/DetailsLink"
 
 const MovieItem = ({ movie, t }) => {
-  console.log("movie", movie)
-
   return (
     <div key={movie.id}>
       <a

@@ -3,14 +3,15 @@ import IconButton from "@mui/material/IconButton"
 import DeleteIcon from "@mui/icons-material/Delete"
 import React from "react"
 
-function TodosList({ todos, setTodos, renderTodos }) {
+function TodosList({ todos, renderTodos, loadTodos }) {
   // Delete
   // 메모화 o/x = TodosList자체가 메모화되고 todos에 따라 함수가 변하므로 변화는 조건이 동일.. 그러므로 메모화는 불필요.
   const delTodo = (id) => {
     const delItem = todos.filter((item) => {
       return item.id !== id
     })
-    setTodos(delItem)
+    localStorage.setItem("todos", JSON.stringify(delItem))
+    loadTodos()
   }
 
   // Update
@@ -18,7 +19,8 @@ function TodosList({ todos, setTodos, renderTodos }) {
     const modItem = todos.map((item) => {
       return item.id === id ? { ...item, completed: !item.completed } : item
     })
-    setTodos(modItem)
+    localStorage.setItem("todos", JSON.stringify(modItem))
+    loadTodos()
   }
 
   return renderTodos.map((todo) => {
