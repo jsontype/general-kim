@@ -9,8 +9,20 @@
     "runtime": "長さ",
     "story": "ストーリー",
     "details": "詳細を見る",
-    "noInfo": "情報なし"
+    "noInfo": "情報なし",
+    "download": "ダウンロード",
+    "showMore": "もっと見る"
   },
   "loading": "Loading...",
-  "showDetail": "詳細を表示"
+  "showDetail": "詳細を表示",
+  "sort": {
+    "label": "ソート",
+    "item": {
+      "default": "デフォルト",
+      "title": "タイトル",
+      "rating": "評価",
+      "year": "最新"
+    }
+  },
+  "limit": "表示数"
 }
