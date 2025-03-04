@@ -1,40 +1,48 @@
 import React from "react"
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import Label from "../../components/atoms/Label"
 import { useTranslation } from "react-i18next"
 import MovieList from "../../components/organisms/MovieList"
-import { useRecoilState } from "recoil"
+import { useRecoilState, useRecoilValue } from "recoil"
 import { moviesFetchTriggerAtom } from "../../store/moviesFetchTriggerAtom"
-import { moviesDataAtom } from "../../store/moviesDataAtom"
 import Loading from "../../components/molecules/Loading"
+import useFetchMovies from "../../util/fetchAPI/useFetchMovies"
+import { Box } from "@mui/material"
+import MovieSelectLimit from "../../components/atoms/Movies/MovieSelectLimit"
+import { moviesApiParamsAtom } from "../../store/moviesApiParamsAtom"
+import MovieSelectSort from "../../components/atoms/Movies/MovieSelectSort"
 
 export default function Movies() {
-  const [movies, setMovies] = useRecoilState(moviesDataAtom)
   const [isFetchRequired, setIsFetchRequired] = useRecoilState(
     moviesFetchTriggerAtom
   )
-  const [isLoading, setIsLoading] = useState(false)
   const { t } = useTranslation("movies")
+  const { fetchMovies, isLoading, movies } = useFetchMovies()
+  const { limit, sort } = useRecoilValue(moviesApiParamsAtom)
 
-  // mounted
   useEffect(() => {
-    if (isFetchRequired === true) {
-      // Loading中のフラグ
-      setIsLoading(true)
-      // fetch("https://yts.mx/api/v2/list_movies.json?sort_by=rating")
-      fetch("https://yts.mx/api/v2/list_movies.json")
-        .then((res) => res.json())
-        .then((json) => {
-          setIsLoading(false)
-          setMovies(json.data.movies)
-        })
+    if (isFetchRequired) {
+      fetchMovies({ limit: limit, sort: sort })
       setIsFetchRequired(false)
     }
-  }, [isFetchRequired])
+  }, [isFetchRequired, limit, sort])
 
   return (
     <div>
-      <Label text={t("title")} />
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          paddingTop: "10px",
+          paddingBottom: "5px",
+        }}
+      >
+        <Label text={t("title")} />
+        <Box>
+          <MovieSelectLimit />
+          <MovieSelectSort />
+        </Box>
+      </Box>
 
       <div>{isLoading ? <Loading /> : <MovieList movies={movies} />}</div>
     </div>

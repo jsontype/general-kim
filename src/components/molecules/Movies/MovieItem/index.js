@@ -6,6 +6,8 @@ import AccordionSummary from "@mui/material/AccordionSummary"
 import AccordionDetails from "@mui/material/AccordionDetails"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import { Box } from "@mui/material"
+import DetailsStory from "../../../atoms/Movies/DetailsStory"
+import DetailsLink from "../../../atoms/Movies/DetailsLink"
 
 const MovieItem = ({ movie, t }) => {
   return (
@@ -56,12 +58,26 @@ const MovieItem = ({ movie, t }) => {
               {Array.isArray(movie.genres) ? movie.genres.join(", ") : ""}
             </div>
             <div>
-              {" "}
               {`${t("item.runtime")}: `} {movie.runtime}分
             </div>
             <div>
+              {`${t("item.download")}: `}
+              {movie.torrents.map((torrent, i) => {
+                const isLastData = i === movie.torrents.length - 1
+
+                return (
+                  <DetailsLink
+                    key={i}
+                    index={i}
+                    url={torrent.url}
+                    isLastData={isLastData}
+                  />
+                )
+              })}
+            </div>
+            <div>
               {`${t("item.story")}: `}
-              {`${movie.synopsis || t("item.noInfo")} `}
+              <DetailsStory movie={movie} t={t} />
             </div>
           </AccordionDetails>
         </Accordion>

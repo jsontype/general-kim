@@ -4,31 +4,25 @@ import Label from "../../components/atoms/Label"
 import NormalButton from "../../components/atoms/NormalButton"
 import { useTranslation } from "react-i18next"
 import TodosList from "../../components/organisms/TodosList"
-import TodosCounter from "../../components/molecules/TodosCounter"
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
+import TodosCounter from "../../components/molecules/Todos/TodosCounter"
+import { useRecoilValue, useSetRecoilState } from "recoil"
 import { todoCountAtom } from "../../store/todoCountAtom"
 import { Box } from "@mui/material"
-import useFetchTodos from "../../util/fetchAPI/useFetchTodos"
-import { todoFetchTriggerAtom } from "../../store/todoFetchTriggerAtom"
 import { todoStateAtom } from "../../store/todoStateAtom"
+import useGetTodos from "../../util/useGetTodos"
 
 export default function Todos() {
-  const { loadTodos, todos, todoKey, setTodoKey, setTodos } = useFetchTodos()
   const [renderTodos, setRenderTodos] = useState([])
-  const [isFetchRequired, setIsFetchRequired] =
-    useRecoilState(todoFetchTriggerAtom)
   const setTodoCount = useSetRecoilState(todoCountAtom)
   const { state } = useRecoilValue(todoStateAtom)
   const [inputText, setInputText] = useState("")
   const { t } = useTranslation("todos")
+  const { loadTodos, todoKey, todos } = useGetTodos()
 
-  // load fetch
+  // todos data가져오기
   useEffect(() => {
-    if (isFetchRequired) {
-      loadTodos()
-      setIsFetchRequired(false)
-    }
-  }, [isFetchRequired])
+    loadTodos()
+  }, [])
 
   // render할 데이터를 filtering하여 데이터 세팅
   useEffect(() => {
@@ -54,13 +48,11 @@ export default function Todos() {
   // Insert
   // 메모화 o/x = props로 넘겨서 새로 생성되는 함수가 아니며 항상 값에 상관없이 todo를 추가 하므로 메모화는 불필요.
   const addTodo = (inputText) => {
-    const addItem = [
-      ...todos,
-      { id: todoKey, title: inputText, completed: false },
-    ]
-    setTodoKey(todoKey + 1)
-    setTodos(addItem)
+    const addItem = { id: todoKey + 1, title: inputText, completed: false }
+    todos.push(addItem)
+    localStorage.setItem("todos", JSON.stringify(todos))
     setInputText("")
+    loadTodos()
   }
 
   return (
@@ -84,6 +76,9 @@ export default function Todos() {
             onChange={(e) => {
               setInputText(e.target.value)
             }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") addTodo(inputText)
+            }}
           />
         </span>
         <NormalButton
@@ -93,9 +88,9 @@ export default function Todos() {
       </div>
       <div>
         <TodosList
-          setTodos={setTodos}
           todos={todos}
           renderTodos={renderTodos}
+          loadTodos={loadTodos}
         />
       </div>
     </div>

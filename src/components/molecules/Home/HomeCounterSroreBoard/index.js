@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil"
-import { countAtom } from "../../../store/countAtom"
+import { countAtom } from "../../../../store/countAtom"
 import { Typography } from "@mui/material"
-import HomeBoardBox from "../../atoms/HomeBoardBox"
+import HomeBoardBox from "../../../atoms/HomeBoardBox"
 
 const HomeCounterScoreBoard = ({ titleText }) => {
   const count = useRecoilValue(countAtom)
