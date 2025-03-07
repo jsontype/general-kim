@@ -9,8 +9,20 @@
     "runtime": "시간",
     "story": "스토리",
     "details": "상세보기",
-    "noInfo": "정보 없음"
+    "noInfo": "정보 없음",
+    "download": "다운로드",
+    "showMore": "더보기"
   },
   "loading": "Loading...",
-  "showDetail": "상세보기"
+  "showDetail": "상세보기",
+  "sort": {
+    "label": "정렬",
+    "item": {
+      "default": "기본",
+      "title": "제목",
+      "rating": "평점",
+      "year": "최신"
+    }
+  },
+  "limit": "표시 수"
 }

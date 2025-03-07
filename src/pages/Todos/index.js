@@ -1,83 +1,70 @@
 import React, { useState, useEffect } from "react"
-import Checkbox from "@mui/material/Checkbox"
-import IconButton from "@mui/material/IconButton"
-import DeleteIcon from "@mui/icons-material/Delete"
 import TextField from "@mui/material/TextField"
 import Label from "../../components/atoms/Label"
 import NormalButton from "../../components/atoms/NormalButton"
 import { useTranslation } from "react-i18next"
+import TodosList from "../../components/organisms/TodosList"
+import TodosCounter from "../../components/molecules/Todos/TodosCounter"
+import { useRecoilValue, useSetRecoilState } from "recoil"
+import { todoCountAtom } from "../../store/todoCountAtom"
+import { Box } from "@mui/material"
+import { todoStateAtom } from "../../store/todoStateAtom"
+import useGetTodos from "../../util/useGetTodos"
 
 export default function Todos() {
-  const [todos, setTodos] = useState([])
+  const [renderTodos, setRenderTodos] = useState([])
+  const setTodoCount = useSetRecoilState(todoCountAtom)
+  const { state } = useRecoilValue(todoStateAtom)
   const [inputText, setInputText] = useState("")
-  const [todoKey, setTodoKey] = useState(0)
   const { t } = useTranslation("todos")
+  const { loadTodos, todoKey, todos } = useGetTodos()
 
-  // Mounted
+  // todos data가져오기
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/todos")
-      .then((res) => res.json())
-      .then((json) => {
-        const result = json.filter((item) => item.userId === 1)
-        setTodos(result)
-        setTodoKey(result.length + 1)
-      })
+    loadTodos()
   }, [])
 
-  const render = todos.map((todo) => {
-    return (
-      <div key={todo.id}>
-        <div>
-          <span
-            className={
-              todo.completed ? "text-gray-500 line-through" : "font-bold"
-            }
-            onClick={() => modTodo(todo.id)}
-          >
-            #{todo.id} / {todo.title}
-          </span>
-          <Checkbox
-            checked={todo.completed}
-            onChange={() => modTodo(todo.id)}
-          />
-          <IconButton aria-label="delete" onClick={() => delTodo(todo.id)}>
-            <DeleteIcon />
-          </IconButton>
-        </div>
-      </div>
+  // render할 데이터를 filtering하여 데이터 세팅
+  useEffect(() => {
+    if (state === "total") setRenderTodos(todos)
+    else if (state === "done")
+      setRenderTodos(todos.filter((todo) => todo.completed === true))
+    else if (state === "none")
+      setRenderTodos(todos.filter((todo) => todo.completed === false))
+  }, [state, todos])
+
+  // 삭제, 변경 등에 따라 갯수를 다시 읽기
+  useEffect(() => {
+    const { done, none } = todos.reduce(
+      (acc, todo) => {
+        todo.completed ? acc.done++ : acc.none++
+        return acc
+      },
+      { done: 0, none: 0 }
     )
-  })
+    setTodoCount({ total: done + none, done: done, none: none })
+  }, [setTodoCount, todos])
 
   // Insert
+  // 메모화 o/x = props로 넘겨서 새로 생성되는 함수가 아니며 항상 값에 상관없이 todo를 추가 하므로 메모화는 불필요.
   const addTodo = (inputText) => {
-    const addItem = [
-      ...todos,
-      { id: todoKey, title: inputText, completed: false },
-    ]
-    setTodoKey(todoKey + 1)
-    setTodos(addItem)
+    const addItem = { id: todoKey + 1, title: inputText, completed: false }
+    todos.push(addItem)
+    localStorage.setItem("todos", JSON.stringify(todos))
     setInputText("")
-  }
-
-  // Delete
-  const delTodo = (id) => {
-    const delItem = todos.filter((item) => {
-      return item.id !== id
-    })
-    setTodos(delItem)
-  }
-
-  // Update
-  const modTodo = (id) => {
-    const modItem = todos.map((item) => {
-      return item.id === id ? { ...item, completed: !item.completed } : item
-    })
-    setTodos(modItem)
+    loadTodos()
   }
 
   return (
     <div>
-      <Label text={t("title")} />
+      <Box
+        display={"flex"}
+        justifyContent={"space-between"}
+        alignItems={"center"}
+      >
+        <Label text={t("title")} />
+        <TodosCounter />
+      </Box>
 
       <div className="mb-[20px]">
         <span className="mr-[5px]">
@@ -89,6 +76,9 @@ export default function Todos() {
             onChange={(e) => {
               setInputText(e.target.value)
             }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") addTodo(inputText)
+            }}
           />
         </span>
         <NormalButton
@@ -96,7 +86,13 @@ export default function Todos() {
           onClick={() => addTodo(inputText)}
         />
       </div>
-      <div>{render}</div>
+      <div>
+        <TodosList
+          todos={todos}
+          renderTodos={renderTodos}
+          loadTodos={loadTodos}
+        />
+      </div>
     </div>
   )
 }

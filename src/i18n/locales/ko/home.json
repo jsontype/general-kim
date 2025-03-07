@@ -1,3 +1,8 @@
 {
-  "title": "홈"
+  "title": "홈",
+  "counter": "카운터",
+  "todos": "투두 리스트",
+  "movies": "영화",
+  "news": "뉴스",
+  "todoState": "선택된 State :"
 }

@@ -9,8 +9,20 @@
     "runtime": "Runtime",
     "story": "Story",
     "details": "View Details",
-    "noInfo": "No Information"
+    "noInfo": "No Information",
+    "download": "Download",
+    "showMore": "Show More"
   },
   "loading": "Loading...",
-  "showDetail": "Show Details"
+  "showDetail": "Show Details",
+  "sort": {
+    "label": "Sort",
+    "item": {
+      "default": "Default",
+      "title": "Title",
+      "rating": "Rating",
+      "year": "Latest"
+    }
+  },
+  "limit": "Item Limit"
 }
