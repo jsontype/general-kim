@@ -90,9 +90,7 @@ const NewsPagination = ({ currentPage, lastPage }) => {
       {isOnLeftArrow && (
         <>
           <ListItem sx={firstItemStyle}>
-            <ListItemButton
-              onClick={() => onChangePageLeftMaxArrow(currentPage)}
-            >
+            <ListItemButton onClick={() => onChangePageLeftMaxArrow()}>
               ←←
             </ListItemButton>
           </ListItem>
@@ -120,9 +118,7 @@ const NewsPagination = ({ currentPage, lastPage }) => {
             </ListItemButton>
           </ListItem>
           <ListItem sx={itemStyle}>
-            <ListItemButton
-              onClick={() => onChangePageRightMaxArrow(currentPage)}
-            >
+            <ListItemButton onClick={() => onChangePageRightMaxArrow()}>
               →→
             </ListItemButton>
           </ListItem>
